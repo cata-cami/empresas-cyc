@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin CYC</title>
+  <script>
+    async function cargarCotizaciones() {
+      const res = await fetch('/ver-cotizaciones');
+      const cotizaciones = await res.json();
+      const lista = document.getElementById('lista');
+      lista.innerHTML = '';
+      cotizaciones.forEach(c => {
+        const item = document.createElement('li');
+        item.textContent = `${c.nombre_cliente} - ${c.descripcion} - ${c.fecha}`;
+        lista.appendChild(item);
+      });
+    }
+    window.onload = cargarCotizaciones;
+  </script>
+</head>
+<body>
+  <h2>Cotizaciones Recibidas</h2>
+  <ul id="lista"></ul>
+</body>
+</html>
